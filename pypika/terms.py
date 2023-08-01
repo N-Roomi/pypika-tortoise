@@ -376,6 +376,8 @@ class ValueWrapper(Term):
             return str.lower(str(value))
         if isinstance(value, uuid.UUID):
             return cls.get_formatted_value(str(value), **kwargs)
+        if isinstance(value, (dict, list)):
+            return format_quotes(json.dumps(value), quote_char)
         if value is None:
             return "null"
         return str(value)
