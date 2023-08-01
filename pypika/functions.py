@@ -2,12 +2,7 @@
 Package for SQL functions wrappers
 """
 from pypika.enums import SqlTypes
-from pypika.terms import (
-    AggregateFunction,
-    Function,
-    LiteralValue,
-    Star,
-)
+from pypika.terms import AggregateFunction, Function, LiteralValue, Star
 from pypika.utils import builder
 
 
@@ -159,7 +154,9 @@ class TimeDiff(Function):
 class DateAdd(Function):
     def __init__(self, date_part, interval, term, alias=None):
         date_part = getattr(date_part, "value", date_part)
-        super(DateAdd, self).__init__("DATE_ADD", LiteralValue(date_part), interval, term, alias=alias)
+        super(DateAdd, self).__init__(
+            "DATE_ADD", LiteralValue(date_part), interval, term, alias=alias
+        )
 
 
 class ToDate(Function):
@@ -174,8 +171,10 @@ class Timestamp(Function):
 
 class TimestampAdd(Function):
     def __init__(self, date_part, interval, term, alias=None):
-        date_part = getattr(date_part, 'value', date_part)
-        super(TimestampAdd, self).__init__("TIMESTAMPADD", LiteralValue(date_part), interval, term, alias=alias)
+        date_part = getattr(date_part, "value", date_part)
+        super(TimestampAdd, self).__init__(
+            "TIMESTAMPADD", LiteralValue(date_part), interval, term, alias=alias
+        )
 
 
 # String Functions

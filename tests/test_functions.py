@@ -650,7 +650,7 @@ class DateFunctionsTests(unittest.TestCase):
     def _test_extract_datepart(self, date_part):
         q = Q.from_(self.t).select(fn.Extract(date_part, self.t.foo))
 
-        value = getattr(date_part, 'value', date_part)
+        value = getattr(date_part, "value", date_part)
         self.assertEqual('SELECT EXTRACT(%s FROM "foo") FROM "abc"' % value, str(q))
 
     def test_extract_microsecond(self):

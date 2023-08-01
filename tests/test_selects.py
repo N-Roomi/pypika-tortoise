@@ -361,19 +361,6 @@ class WhereTests(unittest.TestCase):
         self.assertEqual('SELECT * FROM "abc" WHERE "foo"=\'2020-02-02\'', str(q4))
         self.assertEqual('SELECT * FROM "abc" WHERE "foo"=null', str(q5))
 
-    def test_where_enum(self):
-        q1 = Query.from_(self.t).select("*").where(self.t.foo == MyEnum.STR)
-        q2 = Query.from_(self.t).select("*").where(self.t.foo == MyEnum.INT)
-        q3 = Query.from_(self.t).select("*").where(self.t.foo == MyEnum.BOOL)
-        q4 = Query.from_(self.t).select("*").where(self.t.foo == MyEnum.DATE)
-        q5 = Query.from_(self.t).select("*").where(self.t.foo == MyEnum.NONE)
-
-        self.assertEqual('SELECT * FROM "abc" WHERE "foo"=\'foo\'', str(q1))
-        self.assertEqual('SELECT * FROM "abc" WHERE "foo"=0', str(q2))
-        self.assertEqual('SELECT * FROM "abc" WHERE "foo"=true', str(q3))
-        self.assertEqual('SELECT * FROM "abc" WHERE "foo"=\'2020-02-02\'', str(q4))
-        self.assertEqual('SELECT * FROM "abc" WHERE "foo"=null', str(q5))
-
     def test_where_field_equals(self):
         q1 = Query.from_(self.t).select("*").where(self.t.foo == self.t.bar)
         q2 = Query.from_(self.t).select("*").where(self.t.foo.eq(self.t.bar))
